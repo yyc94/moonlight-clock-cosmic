@@ -1,0 +1,198 @@
+# Moonlight Clock configuration
+#
+# This file is read from ~/.config/moonlight-clock/config.toml by default.
+# Changes are detected and applied automatically within one second.
+
+[window]
+# Select the Wayland output that owns the widget. Use "primary" (the output
+# chosen by the compositor), a zero-based registry index such as 0, or an
+# exact connector name, model, manufacturer, or description.
+monitor = "primary"
+
+# Attach the widget to one of nine positions on the selected display.
+# Valid values: "top left", "top center", "top right", "center left",
+# "center", "center right", "bottom left", "bottom center", "bottom right".
+anchor = "top right"
+
+# Horizontal inset in logical pixels for left/right anchors. Layer shell does
+# not define horizontal offsets for centered anchors, where this is ignored.
+x = 0
+
+# Vertical inset in logical pixels for top/bottom anchors. Layer shell does
+# not define vertical offsets for centered anchors, where this is ignored.
+y = 0
+
+# Scale the complete 614x387 design. Valid range: 0.25 to 4.0.
+scale = 1.0
+
+# Choose the compositor layer. Valid values: "background", "bottom", "top",
+# "overlay". "bottom" keeps the widget below normal application windows.
+stacking = "bottom"
+
+# Reserve screen space for the widget on Wayland. Keep this false for normal
+# desktop-widget behavior so maximized windows may cover the widget.
+exclusive = false
+
+# Control keyboard focus on Wayland. Valid values: "none", "exclusive",
+# "ondemand". "none" is recommended because the widget has no text input.
+focusable = "none"
+
+[appearance]
+# Select a built-in color palette or enable [appearance.custom_colors].
+# Valid values: "blue", "pink", "green", "yellow", "red", "light-green",
+# "purple", "dark-blue", "grey", "custom".
+scheme = "blue"
+
+# Swap the normal bottom-text color with the numeric highlight color.
+invert_bottom = false
+
+# Use the highlight color for countdown, temperature, and rain numbers.
+highlight_numbers = true
+
+# Set the moon/weather icon size in design pixels. Valid range: 10 to 180.
+emoji_size = 70
+
+# Draw a shadow behind the main time text.
+time_shadow = true
+
+# Set the main time shadow displacement in design pixels. Range: 0 to 30.
+time_shadow_offset = 5
+
+# Draw a shadow behind the lower caption and countdown text.
+caption_shadow = false
+
+# Set the lower-text shadow displacement in design pixels. Range: 0 to 30.
+caption_shadow_offset = 3
+
+[appearance.time_font]
+# Set the system font family used for the main time.
+family = "sans-serif"
+
+# Set the main time font size in design pixels. Valid range: 8 to 180.
+size = 70
+
+# Set the main time font weight. Valid range: 100 to 900.
+weight = 400
+
+# Set the main time font style: "normal", "italic", or "oblique".
+style = "normal"
+
+[appearance.date_font]
+# Set the system font family used for the date and weekday.
+family = "sans-serif"
+
+# Set the date font size in design pixels. Valid range: 8 to 180.
+size = 52
+
+# Set the date font weight. Valid range: 100 to 900.
+weight = 700
+
+# Set the date font style: "normal", "italic", or "oblique".
+style = "normal"
+
+[appearance.caption_font]
+# Set the system font family used for captions, values, and countdowns.
+family = "sans-serif"
+
+# Set the caption font size in design pixels. Valid range: 8 to 180.
+size = 50
+
+# Set the caption font weight. Valid range: 100 to 900.
+weight = 700
+
+# Set the caption font style: "normal", "italic", or "oblique".
+style = "normal"
+
+[appearance.custom_colors]
+# These colors are used only when appearance.scheme is "custom". Values may
+# be six-digit hexadecimal RGB colors.
+
+# Color of the upper curved background.
+corner1 = "#67baff"
+
+# Color of the lower curved background.
+corner2 = "#000000"
+
+# Color of the main time text.
+time = "#ffffff"
+
+# Color of the date and weekday text.
+date = "#226182"
+
+# Color of lower captions, units, and secondary countdowns.
+bottom = "#f0f8ff"
+
+# Color of text shadows.
+shadow = "#447fab"
+
+# Color of emphasized numeric values.
+highlight = "#7bffff"
+
+[clock]
+# Format the date line using Chrono strftime directives. The custom %! token
+# expands to a localized phase of day such as "Morning" or "Evening".
+date_format = "%m / %d"
+
+# Format the main time line using Chrono strftime directives. The custom %!
+# phase-of-day token is also supported here.
+time_format = "%H : %M"
+
+# Show the localized weekday abbreviation next to the date.
+show_weekday = true
+
+# Select label language. Valid values: "auto", "en", "zh". "auto" follows
+# the process locale and falls back to English for non-Chinese locales.
+language = "auto"
+
+[bottom]
+# Select one complete lower-content preset. The icon, text, and layout are
+# defined together rather than combined independently. Valid values: "none",
+# "moon", "moon-countdown", "weather", "weather-temp-c",
+# "weather-temp-f", "weather-rain", "custom-countdown",
+# "moon-custom-countdown".
+mode = "moon-countdown"
+
+# Select which lunar quarters moon-countdown may target. Include one or more
+# values from: "new", "first", "full", "last".
+moon_targets = ["full"]
+
+# Show up to two additional configured countdowns below the primary content.
+show_secondary_countdowns = true
+
+[weather]
+# Select the weather service. Valid values: "amap", "weatherapi". AMap is
+# recommended for reliable access from mainland China.
+provider = "amap"
+
+# Allow weather requests. Data is fetched only when a weather icon or weather
+# caption mode is selected and api_key is not empty.
+enabled = false
+
+# Set the API key issued by the selected provider. For AMap, create a Web
+# Service API key. The generated config file has mode 0600, but the key is
+# still stored as plain text.
+api_key = ""
+
+# Set the location. For AMap, use a city adcode such as "110000" for Beijing
+# or "440300" for Shenzhen. WeatherAPI also accepts city names, coordinates,
+# postal codes, and "auto:ip".
+query = "110000"
+
+# Set the refresh interval in minutes. Values below 15 are clamped to 15.
+update_minutes = 60
+
+# Add one or more [[countdowns]] tables for important dates. Dates use ISO
+# YYYY-MM-DD format. Past entries are hidden unless persistent is true.
+
+#[[countdowns]]
+# Display label for this countdown.
+#name = "Release"
+
+# Target date in ISO YYYY-MM-DD format.
+#date = "2026-12-01"
+
+# Include this countdown in the visible countdown list.
+#enabled = true
+
+# Keep showing this countdown after its target date has passed.
+#persistent = false

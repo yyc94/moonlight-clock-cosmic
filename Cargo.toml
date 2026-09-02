@@ -1,0 +1,44 @@
+[package]
+name = "moonlight-clock-cosmic"
+version = "0.4.0-alpha.1"
+edition = "2024"
+rust-version = "1.93"
+description = "A native COSMIC Wayland desktop widget inspired by Persona 3"
+license = "GPL-3.0-or-later"
+readme = "README.md"
+repository = "https://github.com/yyc94/moonlight-clock-cosmic"
+
+[[bin]]
+name = "moonlight-clock"
+path = "src/main.rs"
+
+[dependencies]
+anyhow = "1.0"
+chrono = { version = "0.4", features = ["clock", "serde"] }
+clap = { version = "4.5", features = ["derive"] }
+dirs = "6.0"
+enumflags2 = "0.7"
+libc = "0.2"
+libcosmic = { git = "https://github.com/pop-os/libcosmic", rev = "c3ced76094376bcbe331da0d4518fcc6b27006bb", default-features = false, features = [
+  "multi-window",
+  "tokio",
+  "wayland",
+] }
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sys-locale = "0.3"
+thiserror = "2.0"
+toml = "0.9"
+tokio = { version = "1.47", features = ["fs", "macros", "rt-multi-thread", "time"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+wayland-client = "0.31"
+
+[dev-dependencies]
+tempfile = "3.20"
+
+[profile.release]
+opt-level = "s"
+lto = "thin"
+strip = true
