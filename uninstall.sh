@@ -15,8 +15,6 @@ esac
 
 if [ -x "$PREFIX/bin/moonlight-clock" ]; then
     "$PREFIX/bin/moonlight-clock" stop || true
-elif [ -x "$PREFIX/stop.sh" ]; then
-    "$PREFIX/stop.sh" || true
 fi
 for command in moonlight-clock moonlight-clockctl; do
     link="$BIN_DIR/$command"

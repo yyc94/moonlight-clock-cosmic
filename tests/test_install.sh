@@ -12,17 +12,22 @@ PREFIX="$XDG_DATA_HOME/moonlight-clock"
 export MOONLIGHT_BINARY=${MOONLIGHT_BINARY:-"$ROOT/target/debug/moonlight-clock"}
 
 cleanup() {
-    if [ -x "$PREFIX/stop.sh" ]; then
-        "$PREFIX/stop.sh" >/dev/null 2>&1 || true
+    if [ -x "$PREFIX/bin/moonlight-clock" ]; then
+        "$PREFIX/bin/moonlight-clock" stop >/dev/null 2>&1 || true
     fi
     rm -rf "$TEST_HOME"
 }
 trap cleanup EXIT HUP INT TERM
 
+mkdir -p "$PREFIX"
+: >"$PREFIX/start.sh"
+: >"$PREFIX/stop.sh"
 "$ROOT/install.sh" >/dev/null
 test -L "$HOME/.local/bin/moonlight-clock"
 test -L "$HOME/.local/bin/moonlight-clockctl"
 test -x "$PREFIX/bin/moonlight-clock"
+test ! -e "$PREFIX/start.sh"
+test ! -e "$PREFIX/stop.sh"
 AUTOSTART_FILE="$XDG_CONFIG_HOME/autostart/io.github.moonlight-clock.desktop"
 test -f "$AUTOSTART_FILE"
 grep -Fqx 'Type=Application' "$AUTOSTART_FILE"

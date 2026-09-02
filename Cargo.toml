@@ -1,6 +1,6 @@
 [package]
 name = "moonlight-clock-cosmic"
-version = "0.4.0-alpha.1"
+version = "0.1.0"
 edition = "2024"
 rust-version = "1.93"
 description = "A native COSMIC Wayland desktop widget inspired by Persona 3"

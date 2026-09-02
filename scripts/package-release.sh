@@ -40,7 +40,7 @@ mkdir -p "$STAGING/$NAME"
 
 cp "$BINARY" "$STAGING/$NAME/moonlight-clock"
 chmod 755 "$STAGING/$NAME/moonlight-clock"
-for item in install.sh uninstall.sh start.sh stop.sh config.example.toml README.md LICENSE; do
+for item in install.sh uninstall.sh config.example.toml README.md LICENSE; do
     cp "$ROOT/$item" "$STAGING/$NAME/$item"
 done
 cp -a "$ROOT/assets" "$STAGING/$NAME/assets"

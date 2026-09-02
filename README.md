@@ -29,7 +29,6 @@ cargo run --locked -- run
 ```
 
 This requires Rust 1.93 or newer. Left-click the clock to refresh weather data.
-Stop a background instance with `./stop.sh`.
 
 ## Install
 
@@ -44,8 +43,8 @@ cd moonlight-clock-cosmic-<version>-<architecture>
 This installs the native binary to `~/.local/share/moonlight-clock`, adds
 `moonlight-clock` and `moonlight-clockctl` links under `~/.local/bin`, creates
 the default configuration, and enables COSMIC XDG autostart. Log out and back
-in, or run `moonlight-clock start`. Run the installed `uninstall.sh` to remove
-the application. User configuration is intentionally retained.
+in to start the widget automatically. Run the installed `uninstall.sh` to
+remove the application. User configuration is intentionally retained.
 
 Running `./install.sh` from a source checkout builds a release binary first.
 
@@ -79,25 +78,6 @@ configurations and uses a city adcode such as `110000` for Beijing. The API key
 is stored in the user-only configuration file and sent only to the selected
 provider. AMap does not supply rain probability, so `mode = "weather-rain"`
 displays `--` when AMap is selected.
-
-## Development
-
-```sh
-./scripts/test.sh
-```
-
-The standard test suite covers configuration, astronomy, layout, weather,
-process state, shell syntax, and isolated native installation. Build and
-package in the reproducible Debian container with:
-
-```sh
-./scripts/docker-build.sh
-```
-
-The container verifies formatting, tests, strict clippy, and a release build.
-It cannot validate compositor behavior. Transparency, desktop layer, output
-selection, edge anchoring, scale, input, and hot reload must be checked in a
-real COSMIC Wayland session; X11, Xvfb, and WSLg are not accepted substitutes.
 
 ## Credits And License
 

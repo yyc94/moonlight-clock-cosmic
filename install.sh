@@ -37,11 +37,10 @@ fi
 
 if [ -x "$PREFIX/bin/moonlight-clock" ]; then
     "$PREFIX/bin/moonlight-clock" stop >/dev/null 2>&1 || true
-elif [ -x "$PREFIX/stop.sh" ]; then
-    "$PREFIX/stop.sh" >/dev/null 2>&1 || true
 fi
 
 mkdir -p "$PREFIX/bin" "$BIN_DIR" "$AUTOSTART_DIR"
+rm -f "$PREFIX/start.sh" "$PREFIX/stop.sh"
 TEMP_BINARY="$PREFIX/bin/.moonlight-clock.$$"
 trap 'rm -f "$TEMP_BINARY"' EXIT HUP INT TERM
 cp "$SOURCE_BINARY" "$TEMP_BINARY"
@@ -49,7 +48,7 @@ chmod 755 "$TEMP_BINARY"
 mv -f "$TEMP_BINARY" "$PREFIX/bin/moonlight-clock"
 trap - EXIT HUP INT TERM
 
-for item in config.example.toml README.md LICENSE start.sh stop.sh uninstall.sh; do
+for item in config.example.toml README.md LICENSE uninstall.sh; do
     if [ "$ROOT/$item" != "$PREFIX/$item" ]; then
         cp -a "$ROOT/$item" "$PREFIX/$item"
     fi
@@ -78,4 +77,4 @@ ln -sfn "$PREFIX/bin/moonlight-clock" "$BIN_DIR/moonlight-clockctl"
 chmod 644 "$DESKTOP_FILE"
 
 echo "Installed Moonlight Clock in $PREFIX"
-echo "COSMIC autostart is enabled. Start it now with: $PREFIX/start.sh"
+echo "COSMIC autostart is enabled for the next login."
